@@ -68,7 +68,7 @@ global.linkz = "https://www.instagram.com/anshorfalahi/" //your theme url which 
 global.websitex = "https://www.instagram.com/anshorfalahi/" //ur website to be displayed
 global.botscript = 'https://github.com/DGXeon/CheemsBot-MD4' //script link
 global.reactmoji = "" //ur menu react emoji
-global.themeemoji = "" //ur theme emoji
+global.themeemoji = "🌚" //ur theme emoji
 global.packname = "\n💤Author: AnshorXD\n💤Bot Number: 6289691676082\n💤Bot Name: AnsBot🌚\n💤Instagram: @anshorfalahi\n" //ur sticker watermark packname
 global.author = "" //ur sticker watermark author
 
