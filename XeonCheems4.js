@@ -3506,6 +3506,36 @@ encmedia = await XeonBotInc.sendImageAsSticker(from, wifegerakx, m, { packname: 
 await fs.unlinkSync(encmedia)
 }
 break
+		
+case 'awoawo':
+case 'benedict':
+case 'chat':
+case 'dbfly':
+case 'dino_kuning':
+case 'doge':
+case 'gojosatoru':
+case 'hope_boy':
+case 'jisoo':
+case 'kr_robot':
+case 'kucing':
+case 'lonte':
+case 'manusia_lidi':
+case 'menjamet':
+case 'meow':
+case 'nicholas':
+case 'patrick':
+case 'popoci':
+case 'sponsbob':
+case 'kawan_sponsbob':
+case 'tyni':{
+   if (isBan) return reply(mess.ban)
+	if (isBanChat) return reply(mess.banChat)
+   let stik = await getBuffer(`https://api.zeeoneofc.xyz/api/telegram-sticker/${command}?apikey=V12`)
+   encmedia = await XeonBotInc.sendImageAsSticker(from, stik, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break	
+		
 case 'gura':
 case 'gurastick':{
 	                	            	            	if (isBan) return reply(mess.ban)
