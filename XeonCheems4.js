@@ -2235,6 +2235,15 @@ case 'dare':
               buffer = await getBuffer(`https://i.ibb.co/305yt26/bf84f20635dedd5dde31e7e5b6983ae9.jpg`)
               XeonBotInc.sendMessage(from, { image: buffer, caption: '_You choose TRUTH_\n'+ xeontruth }, {quoted:m})
               break
+		
+case 'Assalamualaikum': 
+case 'assalamualaikum':
+case 'Aslm':
+case 'Asalam':{
+XeonBotInc.sendMessage(m.chat, {text: `\nوَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ\n\n Waalaikumussalam Warahmatullahi Wabarakatuh`}, {quoted:m})
+}
+break
+		
 case 'when':
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
