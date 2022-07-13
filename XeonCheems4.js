@@ -3527,7 +3527,7 @@ case 'hope_boy':
 case 'jisoo':
 case 'kr_robot':
 case 'kucing':
-case 'lonte':
+
 case 'manusia_lidi':
 case 'menjamet':
 case 'meow':
