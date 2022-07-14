@@ -3516,6 +3516,16 @@ await fs.unlinkSync(encmedia)
 }
 break
 		
+case 'stickerly':{
+   if (!text) return reply(`*Example :* ${prefix + command} Naruto`)
+   fet = await fetchJson(`https://api.xteam.xyz/sticker/stickerly?q=${text}&APIKEY=AbilGanss`)
+   omko = fet.result.stickerlist//[Math.floor(Math.random() * fet.result.stickerlist.length)]
+   for (var x = 0; x <= 3; x++) {
+      var hasil = await getBuffer(omko[x])
+   encmedia = await XeonBotInc.sendImageAsSticker(from, hasil, m, { packname: global.packname, author: global.author, })
+   await fs.unlinkSync(encmedia)
+   }
+		
 case 'awoawo':
 case 'benedict':
 case 'chat':
@@ -8906,7 +8916,7 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
 										{
 										"title": "Maker Menu 🌈",
 										"description": "Displays The List Of Logo Making Features",
-										"rowId": `${prefix}indomenu`
+										"rowId": `${prefix}makermenu`
 									},
 									{
 										"title": "Sound Menu 🎵",
@@ -8921,7 +8931,7 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
 									{
 										"title": "Sticker Menu 🃏",
 										"description": "Displays The List Of Sticker Features",
-										"rowId": `${prefix}indomenu`
+										"rowId": `${prefix}stickermenu`
 									},
 									{
 										"title": "Search Menu 🔎",
@@ -8971,7 +8981,7 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
 										{
 										"title": "Game Menu 🎮",
 										"description": "Displays The List Of Game Features",
-										"rowId": `${prefix}indomenu`
+										"rowId": `${prefix}gamemenu`
 									},
 										{
 											"title": "Convert Menu ⚒️",
@@ -9361,6 +9371,27 @@ await XeonBotInc.send5ButImg(from, `╔═══════✪「 OWNER 」
 ╠ ${prefix}ttp
 ╠ ${prefix}doge
 ╠ ${prefix}lovesticker
+╠ ${prefix}gura
+╠ ${prefix}awoawo
+╠ ${prefix}benedict
+╠ ${prefix}chat
+╠ ${prefix}dbfly
+╠ ${prefix}dino_kuning
+╠ ${prefix}doge
+╠ ${prefix}gojosatoru
+╠ ${prefix}hope_boy
+╠ ${prefix}jisoo
+╠ ${prefix}kr_robot
+╠ ${prefix}kucing
+╠ ${prefix}manusia_lidi
+╠ ${prefix}menjamet
+╠ ${prefix}meow
+╠ ${prefix}nicholas
+╠ ${prefix}patrick
+╠ ${prefix}popoci
+╠ ${prefix}sponsbob
+╠ ${prefix}kawan_sponsbob
+╠ ${prefix}tyni
 ╠════✪「 ANIME STICKER 」
 ╠${prefix}loli
 ╠${prefix}bully
@@ -10170,6 +10201,27 @@ await XeonBotInc.send5ButImg(from, `╔═══════✪「 STICKER 」
 ╠ ${prefix}ttp
 ╠ ${prefix}doge
 ╠ ${prefix}lovesticker
+╠ ${prefix}gura
+╠ ${prefix}awoawo
+╠ ${prefix}benedict
+╠ ${prefix}chat
+╠ ${prefix}dbfly
+╠ ${prefix}dino_kuning
+╠ ${prefix}doge
+╠ ${prefix}gojosatoru
+╠ ${prefix}hope_boy
+╠ ${prefix}jisoo
+╠ ${prefix}kr_robot
+╠ ${prefix}kucing
+╠ ${prefix}manusia_lidi
+╠ ${prefix}menjamet
+╠ ${prefix}meow
+╠ ${prefix}nicholas
+╠ ${prefix}patrick
+╠ ${prefix}popoci
+╠ ${prefix}sponsbob
+╠ ${prefix}kawan_sponsbob
+╠ ${prefix}tyni
 ╚═════════════✪` + '' + ' ', `${botname}`,unicorn, [{"urlButton": {"displayText": "Instagram 📍","url": `${websitex}`}},{"urlButton": {"displayText": "Script🔖","url": `${botscript}`}},{"quickReplyButton": {"displayText": "Donate 🍜","id": 'donate'}},{"quickReplyButton": {"displayText": "Owner 👤","id": 'owner'}}] )
 break
 case 'animestickermenu':
