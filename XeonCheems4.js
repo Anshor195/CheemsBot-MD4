@@ -3525,6 +3525,8 @@ case 'stickerly':{
    encmedia = await XeonBotInc.sendImageAsSticker(from, hasil, m, { packname: global.packname, author: global.author, })
    await fs.unlinkSync(encmedia)
    }
+}
+break
 		
 case 'awoawo':
 case 'benedict':
@@ -3537,7 +3539,6 @@ case 'hope_boy':
 case 'jisoo':
 case 'kr_robot':
 case 'kucing':
-
 case 'manusia_lidi':
 case 'menjamet':
 case 'meow':
