@@ -99,6 +99,9 @@ const {
   Couples,
   Darkjokes
 } = require("dhn-api")
+
+const jimp = require('jimp')
+
 //rpg function\\
    const { 
      addInventoriDarah, 
@@ -262,6 +265,15 @@ const Autoreply = m.isGroup ? autorep.includes(from) : false
         const isBan = banUser.includes(m.sender)
         const isBanChat = m.isGroup ? banchat.includes(from) : false
 autoreadsw = true
+	    
+const generateProfilePicture = async(buffer) => {
+   const jimp_1 = await jimp.read(buffer);
+   const resz = jimp_1.getWidth() > jimp_1.getHeight() ? jimp_1.resize(550, jimp.AUTO) : jimp_1.resize(jimp.AUTO, 650)
+   const jimp_2 = await jimp.read(await resz.getBufferAsync(jimp.MIME_JPEG));
+   return {
+   img: await resz.getBufferAsync(jimp.MIME_JPEG)
+   }
+   }
 	    
         //member\\
         let picaks = [flaming,fluming,flarun,flasmurf]
@@ -2393,10 +2405,30 @@ if (isBanChat) return reply(mess.banChat)
                 if (!/image/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
                 if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
                 let media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
-                await XeonBotInc.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
-                reply(mess.success)
-                }
-                break
+                var { img } = await generateProfilePicture(media)
+ 		  await XeonBotInc.query({
+   		   tag: 'iq',
+   		   attrs: {
+  		   to: m.chat,
+ 		   type:'set',
+ 		   xmlns: 'w:profile:picture'
+      		   },
+  		   content: [
+   		   {
+   		   tag: 'picture',
+   		   attrs: { type: 'image' },
+   		   content: img
+   		   }
+   		   ]
+   		   })
+  		 fs.unlinkSync(media)
+  		 replay(mess.success)
+ 		  }
+		else {
+		await XeonBotInc.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
+		replay(mess.success)
+		}}
+		break
             case 'tagall': {
             	if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -3144,9 +3176,30 @@ if (!quoted) return replay(`Send/Reply Image With Caption ${prefix + command}`)
 if (!/image/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
 if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
 let media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
+if (args[0] == `'panjang'`) {
+   var { img } = await generateProfilePicture(media)
+   await XeonBotInc.query({
+   tag: 'iq',
+   attrs: {
+   to: botNumber,
+   type:'set',
+   xmlns: 'w:profile:picture'
+   },
+   content: [
+   {
+   tag: 'picture',
+   attrs: { type: 'image' },
+   content: img
+   }
+   ]
+   })
+   fs.unlinkSync(media)
+   replay(mess.success)
+   }
+else {
 await XeonBotInc.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
 replay(mess.success)
-}
+}}
 break
             case 'linkgroup': case 'linkgc': case 'gclink': case 'grouplink': {
             	if (isBan) return reply(mess.ban)	 			
@@ -8002,7 +8055,69 @@ break
                 XeonBotInc.sendText(m.chat, `${themeemoji} *Results :* ${anu.message}`, m)
             }
             break
-	    case 'tiktok':{
+
+case 'tiktok':{
+   if (isBan) return reply(mess.ban)
+   if (isBanChat) return reply(mess.banChat)
+   if (!q) return reply('Where is the link?')
+   reply(mess.wait)
+   if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+   let anu = await fetchJson(`https://fatiharridho.herokuapp.com/api/downloader/tiktok?url=${text}`)
+   let buttons = [
+      {buttonId: `ttwm ${q}`, buttonText: {displayText: 'With Watermark '}, type: 1},
+      {buttonId: `ttnowm ${q}`, buttonText: {displayText: 'No Watermark '}, type: 1},
+      {buttonId: `ttaud ${q}`, buttonText: {displayText: 'Audio '}, type: 1}
+      ]
+      let buttonMessage = {
+         image: {url: anu.result.thumbnail},
+         caption: `==TIKTOK DOWNLOADER==\n\n 🌚 *Author* : ${anu.result.author}\n 🌚 *Description* : ${anu.result.title}`,
+         footer: `${botname}`,
+         buttons: buttons,
+         headerType: 4,
+         contextInfo:{externalAdReply:{
+            title: `${ownername}`,
+            body: `${pushname}`,
+            thumbnail: log0,
+            mediaType:1,
+            mediaUrl: q,
+            sourceUrl: q
+            }}
+      }   
+      XeonBotInc.sendMessage(from, buttonMessage, {quoted:m})
+   }
+   break
+case 'ttwm': case 'tiktokwm': {
+   if (isBan) return reply(mess.ban)
+   if (isBanChat) return reply(mess.banChat)
+   if (!q) return reply('Where is the link?')
+   reply(mess.wait)
+   if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+   let anu = await fetchJson(`https://fatiharridho.herokuapp.com/api/downloader/tiktok?url=${text}`)
+   XeonBotInc.sendMessage(from, { video: { url: anu.result.watermark }, caption: "Here you go!" }, { quoted: m })
+}
+break
+case 'ttnowm': case 'tiktoknowm': {
+   if (isBan) return reply(mess.ban)
+   if (isBanChat) return reply(mess.banChat)
+   if (!q) return reply('Where is the link?')
+   reply(mess.wait)
+   if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+   let anu = await fetchJson(`https://fatiharridho.herokuapp.com/api/downloader/tiktok?url=${text}`)
+   XeonBotInc.sendMessage(from, { video: { url: anu.result.nowm }, caption: "Here you go!" }, { quoted: m })
+}
+break
+case 'ttaud': case 'tiktokaudio': {
+   if (isBan) return reply(mess.ban)
+   if (isBanChat) return reply(mess.banChat)
+   if (!q) return reply('Where is the link?')
+   reply(mess.wait)
+   if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+   let anu = await fetchJson(`https://fatiharridho.herokuapp.com/api/downloader/tiktok?url=${text}`)
+   XeonBotInc.sendMessage(from, { audio: { url: anu.result.audio }, mimetype: 'audio/mp4' }, { quoted: m })
+}
+break		
+		
+	    /*case 'tiktok':{
   	if (isBan) return reply(mess.ban)
 	if (isBanChat) return reply(mess.banChat)
   if (!q) return reply('Where is the link?')
@@ -8065,7 +8180,7 @@ case 'ttaud':{
    const xeonytiktokaudio = musim_rambutan.result.nowatermark
     XeonBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
- break
+ break*/
 	case 'music': case 'play': case 'song': case 'ytplay': {
    if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
