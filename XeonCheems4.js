@@ -2405,31 +2405,31 @@ if (isBanChat) return reply(mess.banChat)
                 if (!/image/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
                 if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
                 let media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
-                var { img } = await generateProfilePicture(media)
-		if (args[0] == `'panjang'`) {
- 		  await XeonBotInc.query({
-   		   tag: 'iq',
-   		   attrs: {
-  		   to: m.chat,
- 		   type:'set',
- 		   xmlns: 'w:profile:picture'
-      		   },
-  		   content: [
-   		   {
-   		   tag: 'picture',
-   		   attrs: { type: 'image' },
-   		   content: img
-   		   }
-   		   ]
-   		   })
-  		 fs.unlinkSync(media)
-  		 replay(mess.success)
- 		  }
-		else {
-		await XeonBotInc.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
-		replay(mess.success)
-		}}
-		break
+                if (args[0] == `'panjang'`) {
+                    var { img } = await generateProfilePicture(media)
+                    await XeonBotInc.query({
+                       tag: 'iq',
+                       attrs: {
+                       to: m.chat,
+                       type:'set',
+                       xmlns: 'w:profile:picture'
+                       },
+                       content: [
+                       {
+                       tag: 'picture',
+                       attrs: { type: 'image' },
+                       content: img
+                       }
+                       ]
+                       })
+                    fs.unlinkSync(media)
+                    replay(mess.success)
+                    }
+                 else {
+                 await XeonBotInc.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
+                 replay(mess.success)
+                 }}
+                 break
             case 'tagall': {
             	if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
