@@ -2406,6 +2406,7 @@ if (isBanChat) return reply(mess.banChat)
                 if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command}`)
                 let media = await XeonBotInc.downloadAndSaveMediaMessage(quoted)
                 var { img } = await generateProfilePicture(media)
+		if (args[0] == `'panjang'`) {
  		  await XeonBotInc.query({
    		   tag: 'iq',
    		   attrs: {
