@@ -7653,12 +7653,12 @@ if (isBanChat) return reply(mess.banChat)
 if (isBanChat) return reply(mess.banChat)
 		let { quotesAnime } = require('./lib/scraperW')
                 let anu = await quotesAnime()
-                result = anu[Math.floor(Math.random() * anu.length)]
+                resul = anu[Math.floor(Math.random() * anu.length)]
                 let buttons = [
                     {buttonId: `quotesanime`, buttonText: {displayText: 'Next'}, type: 1}
                 ]
                 let buttonMessage = {
-                    text: `~_${result.quotes}_\n\nBy '${result.karakter}', ${result.anime}\n\n- ${result.up_at}`,
+                    text: `~_${resul.quotes}_\n\nBy '${resul.karakter}', ${resul.anime}\n\n- ${resul.up_at}`,
                     footer: 'Press The Button Below',
                     buttons: buttons,
                     headerType: 2
@@ -7722,12 +7722,12 @@ break
 	if (isBanChat) return reply(mess.banChat)
 		let { quotesAnime } = require('./lib/scraper')
                 let anu = await quotesAnime()
-                result = anu[Math.floor(Math.random() * anu.length)]
+                resul = anu[Math.floor(Math.random() * anu.length)]
                 let buttons = [
                     {buttonId: `quotesanime`, buttonText: {displayText: '➡️Next➡️'}, type: 1}
                 ]
                 let buttonMessage = {
-                    text: `~_${result.quotes}_\n\nBy '${result.karakter}', ${result.anime}\n\n- ${result.up_at}`,
+                    text: `~_${resul.quotes}_\n\nBy '${resul.karakter}', ${resul.anime}\n\n- ${resul.up_at}`,
                     footer: 'Press The Button Below',
                     buttons: buttons,
                     headerType: 2
